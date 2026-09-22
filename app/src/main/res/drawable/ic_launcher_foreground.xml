@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Folder Base -->
+    <path
+        android:fillColor="#18362B"
+        android:pathData="M24,34 C24,31.8 25.8,30 28,30 L44,30 L50,36 L80,36 C82.2,36 84,37.8 84,40 L84,74 C84,76.2 82.2,78 80,78 L28,78 C25.8,78 24,76.2 24,74 Z" />
+
+    <!-- Folder Front Flap -->
+    <path
+        android:fillColor="#214A3B"
+        android:pathData="M24,43 C24,40.8 25.8,39 28,39 L80,39 C82.2,39 84,40.8 84,43 L84,74 C84,76.2 82.2,78 80,78 L28,78 C25.8,78 24,76.2 24,74 Z" />
+
+    <!-- Zipper band across middle -->
+    <path
+        android:fillColor="#0E231B"
+        android:pathData="M51,39 L57,39 L57,78 L51,78 Z" />
+
+    <!-- Zipper teeth -->
+    <path
+        android:fillColor="#00D287"
+        android:pathData="M51,43 L54,43 L54,45 L51,45 Z M54,46 L57,46 L57,48 L54,48 Z M51,49 L54,49 L54,51 L51,51 Z M54,52 L57,52 L57,54 L54,54 Z M51,55 L54,55 L54,57 L51,57 Z M54,58 L57,58 L57,60 L54,60 Z" />
+
+    <!-- Zipper slider pull -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M50,62 L58,62 L56,70 L52,70 Z" />
+    <path
+        android:fillColor="#0E231B"
+        android:pathData="M53,65 L55,65 L55,68 L53,68 Z" />
+
+    <!-- R Badge on bottom right -->
+    <path
+        android:fillColor="#00D287"
+        android:pathData="M66,66 m-11,0 a11,11 0 1,0 22,0 a11,11 0 1,0 -22,0" />
+
+    <!-- Bold letter R in badge -->
+    <path
+        android:fillColor="#091813"
+        android:pathData="M62,60 L66.5,60 C68.4,60 69.8,61.2 69.8,62.8 C69.8,64.1 68.9,65.1 67.6,65.4 L70.2,71 L67.8,71 L65.5,65.8 L63.8,65.8 L63.8,71 L62,71 Z M63.8,64.2 L66.2,64.2 C67.1,64.2 67.9,63.6 67.9,62.8 C67.9,62.0 67.1,61.5 66.2,61.5 L63.8,61.5 Z" />
+</vector>
+

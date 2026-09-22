@@ -1,0 +1,6 @@
+{
+  "name": "R File",
+  "description": "Advanced file and archive manager inspired by ZArchiver with in-archive browsing, compression, extraction, hex editor, APK inspector, and storage analyzer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
