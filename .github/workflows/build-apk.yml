@@ -1,0 +1,79 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build Type (debug or release)'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - release
+          - both
+
+jobs:
+  build:
+    name: Build & Package APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x gradlew
+
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest --continue
+
+      - name: Build Debug APK
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.build_type == 'debug' || inputs.build_type == 'both' }}
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Build Release APK
+        if: ${{ github.event_name == 'workflow_dispatch' && (inputs.build_type == 'release' || inputs.build_type == 'both') }}
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Prepare APK outputs
+        run: |
+          mkdir -p output-apks
+          if [ -d "app/build/outputs/apk/debug" ]; then
+            find app/build/outputs/apk/debug -name "*.apk" -exec cp {} output-apks/r-file-debug.apk \;
+          fi
+          if [ -d "app/build/outputs/apk/release" ]; then
+            find app/build/outputs/apk/release -name "*.apk" -exec cp {} output-apks/r-file-release-unsigned.apk \;
+          fi
+          ls -la output-apks/
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: R-File-APK
+          path: output-apks/*.apk
+          retention-days: 30
+
+      - name: Create GitHub Release (On tag push)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: output-apks/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
